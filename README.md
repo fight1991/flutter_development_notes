@@ -3,7 +3,7 @@ flutter开发笔记
 ## 启动页概念
 > 1. 原生的冷启动页
 > 2. material中的home页
-## 获取当前视口的宽高
+## 获取当前容器的宽高
 + 1. MediaQuery.of(context).size.width
 + 2. MediaQuery.of(context).size.height
 ##  表单部分
@@ -47,3 +47,27 @@ void checkPermission () async {
 + bool.fromEnvironment("dart.vm.product") 判断是否是release环境
 ## 其它注意点
 + 在initState中是无法访问上下文对象context的 因为widget和state还尚未绑定;可以放在异步队列中执行Future.delayed
+
+## 网络请求
++ 在高版本中 android/ios中不允许http请求(需要https)
+  ```text
+  1.android中 工程目录android/app/src/main/res目录下创建xml文件夹创建xml文件命名为aa(随意)
+  <?xml version="1.0" encoding="utf-8"?>
+  <network-security-config>
+    <base-config cleartextTrafficPermitted="true"/>
+  </network-security-config>
+  2. 在AndroidManifest.xml中
+    <application android:networkSecurityConfig="@xml/aa">
+  3. 在在AndroidManifest.xml添加网络请求权限
+    <uses-permission android:name="android.permisson.INTERNET"/>
+  1. ios中 工程目录ios/Runner/info.plist
+     <dict>
+        <key>NSAppTransportSecurity</key>
+        <dict>
+          <key>NSAllowsArbitraryLoads</key>
+          <true/>
+        </dict>
+  ```
+## 检查更新
++ 1.0.0+2  其中1.0.0是版本信息 +2代表编译次数
++ 相关插件 package_info
