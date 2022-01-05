@@ -47,6 +47,7 @@ void checkPermission () async {
 + bool.fromEnvironment("dart.vm.product") 判断是否是release环境
 ## 其它注意点
 + 在initState中是无法访问上下文对象context的 因为widget和state还尚未绑定;可以放在异步队列中执行Future.delayed
++ 使用container添加背景图片,并且置在屏幕最上方时, appbar的高度覆盖不了
 
 ## 网络请求
 + 在高版本中 android/ios中不允许http请求(需要https)
@@ -69,5 +70,18 @@ void checkPermission () async {
         </dict>
   ```
 ## 检查更新
-+ 1.0.0+2  其中1.0.0是版本信息 +2代表编译次数
++ 1.0.0+2  其中1.0.0是版本信息 +2代表编译次数/构建号
 + 相关插件 package_info
+## navigator
++ 关掉所有页面,保留需要的页面
+```text
+路由跳转期望保留首页/main其余的页面清除
+跳转到首页的时候必须命用名式路由,否则不保留'/main页面'
+```
+## ThemeData
++ primarySwatch 用于导航栏FloatingActionButton的背景色等
++ brightness 配置应用程序的亮色/暗色
++ primaryColor 主背景色,不配置的话默认取primarySwatch颜色
++ accentColor 应用程序的前景色,文本按钮,选中的颜色 列如switch开关、radio等选中时的颜色,文本输入框光标的颜色,下划线的颜色
++ appBarTheme 配置appBar的颜色
++ iconTheme 应用程序中icon中的颜色,大小等
